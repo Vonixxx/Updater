@@ -1,4 +1,4 @@
-package search
+package updater
 
 import     "core:c"
 import     "core:os"
@@ -61,7 +61,7 @@ input :: proc() -> cstring {
 }
 
 main :: proc() {
-	ray.InitWindow(SCREEN_WIDTH , SCREEN_HEIGHT , "Search")
+	ray.InitWindow(SCREEN_WIDTH , SCREEN_HEIGHT , "Updater")
 	defer ray.CloseWindow()
 
 	ray.SetTargetFPS(60)
