@@ -66,7 +66,7 @@ main :: proc() {
 
 	ray.SetTargetFPS(60)
 
-	ray.GuiLoadStyle("mocha.rgs")
+	ray.GuiLoadStyle("./Source/mocha.rgs")
 
 	ray.ClearBackground(ray.Color{17, 17, 27,255})
 
