@@ -2,6 +2,7 @@ package updater
 
 import     "core:c"
 import     "core:os"
+import     "core:fmt"
 import str "core:strings"
 import ray "vendor:raylib"
 import     "core:unicode/utf8"
@@ -26,11 +27,15 @@ Size := struct {
 }
 
 Command := struct {
-	exec    : string,
-	profile : string,
-	args    : []string,
+	progress : f32,
+	pid      : os.Pid,
+	exec     : string,
+	profile  : string,
+	error    : os.Errno,
+	args     : []string,
 } {
-	exec    = "nixos-rebuild",
+	progress = 0,
+	exec     = "nixos-rebuild",
 }
 
 Textbox := struct {
@@ -103,8 +108,16 @@ main :: proc() {
 			Command.profile   = str.concatenate([]string{"github:Vonixxx/Vontoo#",string(Textbox.input_text)})
 			Command.args      = {"boot" , "--flake" , Command.profile}
 
-			if ray.IsKeyPressed(ray.KeyboardKey.ENTER) {
+			if ray.IsKeyPressed(.ENTER) {
 				os.execvp(Command.exec , Command.args)
+
+				Size.h = 30
+				Size.w = 200
+
+				Position.y = 120
+				Position.x = (SCREEN_WIDTH - Size.w) / 2
+
+				ray.GuiProgressBar(ray.Rectangle{Position.x,Position.y,Size.w,Size.h}, "Updating", "Updating", &Command.progress , 0, 10000)
 			}
 		}
 	}

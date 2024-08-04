@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-odin build Source -file -out:updater -o:aggressive -microarch:native
+odin build Source -file -out:updater -o:speed -microarch:native
